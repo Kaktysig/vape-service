@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}
+  {{ title }}
+  <a href="{% url 'add_order' %}" class="btn btn-facebook btn-sm">Добавить</a>
+{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <div class="card-header card-header-success">
+      <h4 class="card-title ">Открытые заказы</h4>
+{#      <p class="card-category"> Here is a subtitle for this table</p>#}
+    </div>
+    <div class="card-body">
+      {% if object_list.count > 0 %}
+      <div class="table-responsive">
+        <table class="table">
+          <thead class="font-weight-bold">
+            <tr>
+              <td width="30%">№</td>
+              <td width="30%">Заказчик</td>
+              <td width="30%">Статус</td>
+              <td width="10%"></td>
+            </tr>
+          </thead>
+          <tbody>
+            {% for el in object_list %}
+              <tr>
+                <td>{{ el.num_order }}</td>
+                <td>{{ el.customer }}</td>
+                <td>{{ el.get_status }}</td>
+                <td>
+                  <a href="{% url 'order_detail' pk=el.pk %}" class="btn btn-sm btn-success">Подробнее</a>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+        <p class="text-info"><h2 class="text-center">Нет доступных заказов</h2></p>
+    {% endif %}
+    </div>
+  </div>
+{% endblock %}

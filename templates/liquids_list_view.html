@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+      <div class="card">
+        <div class="card-header card-header-success">
+          <h4>Линейки <a href="{% url 'add_lain' %}" class="btn btn-sm btn-facebook ml-3">Добавить</a></h4>
+        </div>
+        <div class="card-body">
+          <ul>
+            {% for lain in lains %}
+              <li>
+                {{ lain.name }}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-9 col-lg-9 col-md-6 col-sm-12">
+      <div class="card">
+        <div class="card-header card-header-success">
+          <h4>Жидкости <a href="{% url 'add_liquid' %}" class="btn btn-sm btn-facebook ml-3">Добавить</a></h4>
+        </div>
+        <div class="card-body">
+          {% if liquids.count > 0 %}
+            <div class="table-responsive">
+              <table class="table">
+                <thead class="font-weight-bold">
+                  <tr>
+                    <td>Линейка</td>
+                    <td>Название</td>
+                    <td>Объём</td>
+                    <td>Цена</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for el in liquids %}
+                    <tr>
+                      <td>{{ el.name_lain }}</td>
+                      <td>{{ el.name_ex }}</td>
+                      <td>{{ el.volume }}</td>
+                      <td>{{ el.price }}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          {% else %}
+              <p class="text-info"><h2 class="text-center">Пока нет доступных жидкостей</h2></p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

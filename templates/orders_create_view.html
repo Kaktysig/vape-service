@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="card">
+    <div class="card-header card-header-success">
+      <h4>Основная информация</h4>
+    </div>
+    <div class="card-body">
+      <form class="order-form" method="post">
+        {% for field in form %}
+          <div class="form-group">
+            <lable class="text-success">{{ field.label }}</lable>
+            {{ field }}
+          </div>
+        {% endfor %}
+      </form>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <td>Линейка</td>
+              <td>Наименование</td>
+              <td>Количество</td>
+            </tr>
+          </thead>
+          <tbody class="outs-rows">
+            <tr class="d-none outs-item">
+              <td>
+                <select class="form-control change-liquids-list" onchange="ChangeLiquidsList(this)">
+                  <option value="0">---------</option>
+                  {% for lain in lains %}
+                    <option value="{{ lain.id }}">{{ lain.name }}</option>
+                  {% endfor %}
+                </select>
+              </td>
+              {% for field in outsform %}
+                <td>
+                  {{ field }}
+                </td>
+              {% endfor %}
+            </tr>
+          </tbody>
+        </table>
+        <div class="text-right">
+          <button class="btn btn-success btn-sm add-another-row">Добавить наименование</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-block btn-success btn-create-order">Добавить</button>
+{% endblock %}
+
+{% block scripts %}
+  <script type="application/javascript" src="{% static 'js/order_post.js' %}"></script>
+{% endblock %}

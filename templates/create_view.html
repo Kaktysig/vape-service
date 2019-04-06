@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="card">
+    <div class="card-header card-header-success">
+      <h4>Основная информация</h4>
+    </div>
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+          <div class="form-group">
+            <lable class="text-success">{{ field.label }}</lable>
+            {{ field }}
+          </div>
+        {% endfor %}
+          <button type="submit" class="btn btn-block btn-success">Добавить</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,41 @@
+<div class="card m-2 out-card">
+  <div class="card-header card-header-success">
+    <p class="float-right">{{ object.get_status }}</p>
+    <h4 class="font-weight-bold">Информация о заказе</h4>
+    <p class="card-category"><b>Заказчик</b>: {{ object.customer }}</p>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <form method="post" class="out-form" data-id="{{ object.pk }}">
+        <table class="table">
+        <thead>
+          <tr>
+            <td>Линейка</td>
+            <td>Наименование</td>
+            <td>Объем</td>
+            <td>Количество</td>
+            <td class="text-center">Отправление</td>
+          </tr>
+        </thead>
+         <tbody>
+         {% for out in object.outs.all %}
+            <tr>
+              <td>{{ out.liquid_lain }}</td>
+              <td>{{ out.name_ex }}</td>
+              <td>{{ out.liquid_volume }}</td>
+              <td>{{ out.qt }}</td>
+              <td class="text-center">
+                {% if out.include %}
+                  <b>Отправлено</b><br>{{ out.date | date:"d.m.Y" }}
+                {% else %}
+                  <input name="out-{{ out.pk }}" type="checkbox"/>
+                {% endif %}
+              </td>
+            </tr>
+         {% endfor %}
+         </tbody>
+        </table>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  {% include 'blocks/orders-outs.html' %}
+  <div class="text-right d-block mb-5">
+    <button class="btn btn-success send-outs">Отправить</button>
+  </div>
+
+  {% include 'blocks/orders-delivery.html' %}
+  <div class="text-right mb-5 d-none divbtn-delivery">
+    <button class="btn btn-info send-delivery">Отправить</button>
+  </div>
+
+  {% include 'blocks/all-ok.html' %}
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.3.0/snap.svg-min.js"></script>
+    <script src="{% static 'js/order_post.js' %}"></script>
+{% endblock %}
